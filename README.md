@@ -1,29 +1,29 @@
 # Ethereum Wallet API - Complete Solution
 
-Ethereum Mainnet ve BSC üzerinde wallet bakiyesi ve transaction sorguları yapan kapsamlı NestJS backend uygulaması.
+Comprehensive NestJS backend application for wallet balance and transaction queries on Ethereum Mainnet and BSC.
 
-## 🚀 Teknolojiler
+## 🚀 Technologies
 
 - **Node.js** (JavaScript/TypeScript)
 - **NestJS 11** - Backend framework
-- **Ethers.js v6+** - Ethereum blockchain ile etkileşim
+- **Ethers.js v6+** - Ethereum blockchain interaction
 - **Infura** - Ethereum/BSC RPC provider
 
-## ✅ Özellikler
+## ✅ Features
 
-- 🔍 **Native Balance:** ETH ve BNB bakiye sorgusu
-- 💰 **Token Balance:** USDT bakiye sorgusu (Ethereum + BSC)
-- 📊 **Transaction Query:** Hash ile transaction detayları
-- 🔍 **Transaction Parsing:** FROM, TO, Amount, Status bilgileri
-- ✅ **Adres validasyonu** ve error handling
-- 📝 **Postman Collection** hazır!
+- 🔍 **Native Balance:** ETH and BNB balance query
+- 💰 **Token Balance:** USDT balance query (Ethereum + BSC)  
+- 📊 **Transaction Query:** Transaction details by hash
+- 🔍 **Transaction Parsing:** FROM, TO, Amount, Status information
+- ✅ **Address validation** and error handling
+- 📝 **Postman Collection** ready!
 
 ## 📋 API Endpoints
 
 ### **1. Native Balances**
 ```bash
-GET /wallet/eth-balance?address=0x...     # ETH bakiyesi
-GET /wallet/bnb-balance?address=0x...     # BNB bakiyesi
+GET /wallet/eth-balance?address=0x...     # ETH balance
+GET /wallet/bnb-balance?address=0x...     # BNB balance
 ```
 
 ### **2. Token Balances**
@@ -38,39 +38,39 @@ GET /wallet/transaction?hash=0x...&network=ETH    # Ethereum TX
 GET /wallet/transaction?hash=0x...&network=BSC    # BSC TX
 ```
 
-## 🔧 Kurulum
+## 🔧 Installation
 
 ```bash
-# Projeyi klonla
+# Clone the project
 git clone <repo-url>
 cd etherjs-wallet
 
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# Development modunda başlat
+# Start in development mode
 npm run start:dev
 ```
 
 ## 📝 Postman Collection
 
-**Dosya:** `Ethereum_Wallet_API.postman_collection.json`
+**File:** `Ethereum_Wallet_API.postman_collection.json`
 
-### Import Etme:
-1. Postman açın → **Import** 
-2. **File** → `Ethereum_Wallet_API.postman_collection.json` seçin
-3. **Import** edin
+### How to Import:
+1. Open Postman → **Import** 
+2. **File** → Select `Ethereum_Wallet_API.postman_collection.json`
+3. **Import** it
 
-### Collection İçeriği:
-- ✅ **6 Endpoint** (tüm API'ler)
-- ✅ **Variables** (baseUrl, test adresleri) 
-- ✅ **Example Responses** (örnek cevaplar)
-- ✅ **Auto Tests** (otomatik validasyon)
-- ✅ **Error Cases** (hata senaryoları)
+### Collection Contents:
+- ✅ **6 Endpoints** (all APIs)
+- ✅ **Variables** (baseUrl, test addresses) 
+- ✅ **Example Responses** (sample responses)
+- ✅ **Auto Tests** (automatic validation)
+- ✅ **Error Cases** (error scenarios)
 
-## 🧪 Test Örnekleri
+## 🧪 Test Examples
 
-### Başarılı ETH Balance Response:
+### Successful ETH Balance Response:
 ```json
 {
   "success": true,
@@ -78,7 +78,7 @@ npm run start:dev
   "balance": "3.912885883209562072", 
   "token": "ETH",
   "network": "Ethereum",
-  "message": "ETH bakiyesi başarıyla sorgulandı"
+  "message": "ETH balance queried successfully"
 }
 ```
 
@@ -92,7 +92,7 @@ npm run start:dev
     "to": "0x456...",        // TO address  
     "value": "1.5",          // Amount (ETH/BNB)
     "gasPrice": "20.5",      // Gas price (gwei)
-    "gasUsed": "21000",      // Gas kullanımı
+    "gasUsed": "21000",      // Gas usage
     "status": 1,             // 1=Success, 0=Failed
     "blockNumber": 18500000,
     "confirmations": 12,
@@ -102,63 +102,63 @@ npm run start:dev
 }
 ```
 
-## Teknolojiler
+## Technologies
 
 - **Node.js** (JavaScript/TypeScript)
 - **NestJS 11** - Backend framework
-- **Ethers.js v6+** - Ethereum blockchain ile etkileşim
+- **Ethers.js v6+** - Ethereum blockchain interaction
 - **Infura** - Ethereum RPC provider
 
-## Özellikler
+## Features
 
-- ✅ Ethereum Mainnet üzerinde USDT bakiye sorgulama
-- ✅ ERC-20 token contract entegrasyonu
-- ✅ Insan tarafından okunabilir format (string)
-- ✅ Adres validasyonu
+- ✅ USDT balance query on Ethereum Mainnet
+- ✅ ERC-20 token contract integration
+- ✅ Human-readable format (string)
+- ✅ Address validation
 - ✅ Error handling
 
-## Kurulum
+## Installation
 
 ```bash
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# Uygulamayı başlat
+# Start the application
 npm run start
 
-# Development modunda başlat
+# Start in development mode
 npm run start:dev
 ```
 
-## API Kullanımı
+## API Usage
 
-### USDT Bakiye Sorgulama
+### USDT Balance Query
 
 **Endpoint:** `GET /wallet/usdt-balance`
 
 **Query Parameters:**
-- `address` (string, zorunlu): Sorgulanacak Ethereum wallet adresi
+- `address` (string, required): Ethereum wallet address to query
 
-**Örnek İstek:**
+**Example Request:**
 ```bash
 curl "http://localhost:3000/wallet/usdt-balance?address=0x5041ed759Dd4aFc3a72b8192C143F72f4724081A"
 ```
 
-**Örnek Yanıt:**
+**Example Response:**
 ```json
 {
   "success": true,
   "address": "0x5041ed759Dd4aFc3a72b8192C143F72f4724081A",
   "balance": "15.23",
   "token": "USDT",
-  "message": "USDT bakiyesi başarıyla sorgulandı"
+  "message": "USDT balance queried successfully"
 }
 ```
 
-## Teknik Detaylar
+## Technical Details
 
-### USDT Token Bilgileri
-- **Contract Adresi:** `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+### USDT Token Information
+- **Contract Address:** `0xdAC17F958D2ee523a2206206994597C13D831ec7`
 - **Decimals:** 6
 - **Network:** Ethereum Mainnet
 
@@ -174,34 +174,34 @@ curl "http://localhost:3000/wallet/usdt-balance?address=0x5041ed759Dd4aFc3a72b81
 - **RPC URL:** `https://mainnet.infura.io/v3/4745b6b8a3ac4fa4a0552beca95c3ec8`
 - **Network:** Ethereum Mainnet (Chain ID: 1)
 
-## Test Wallet Adresleri
+## Test Wallet Addresses
 
-Bu adreslerle test edebilirsiniz:
+You can test with these addresses:
 
 1. **Binance Hot Wallet:** `0x5041ed759Dd4aFc3a72b8192C143F72f4724081A`
 2. **Bitfinex Wallet:** `0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa`
 3. **Kraken Wallet:** `0x267be1C1D684F78cb4F6a176C4911b741E4Ffdc0`
 
-## Geliştirme
+## Development
 
 ```bash
-# Test çalıştır
+# Run tests
 npm run test
 
-# E2E test çalıştır  
+# Run E2E tests  
 npm run test:e2e
 
 # Build
 npm run build
 
-# Production başlat
+# Start production
 npm run start:prod
 ```
 
-## Hata Kodları
+## Error Codes
 
-- `400 Bad Request`: Geçersiz wallet adresi veya eksik parametre
-- `500 Internal Server Error`: RPC bağlantı hatası veya contract sorgu hatası
+- `400 Bad Request`: Invalid wallet address or missing parameter
+- `500 Internal Server Error`: RPC connection error or contract query error
 
 ## Description
 

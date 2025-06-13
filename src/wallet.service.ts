@@ -136,13 +136,13 @@ export class WalletService {
   async getBnbBalance(address: string): Promise<string> {
     try {
       if (!ethers.isAddress(address)) {
-        throw new Error('Geçersiz Ethereum adresi');
+        throw new Error('Invalid Ethereum address');
       }
 
       const balance = await this.bscProvider.getBalance(address);
       return ethers.formatEther(balance);
     } catch (error) {
-      throw new Error(`BNB bakiye sorgulanamadı: ${error.message}`);
+      throw new Error(`BNB balance fetch failed: ${error.message}`);
     }
   }
 

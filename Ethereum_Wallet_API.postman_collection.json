@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Ethereum Wallet API",
-    "description": "Ethereum ve BSC wallet bakiyesi ve transaction sorguları için API collection",
+    "description": "API collection for Ethereum and BSC wallet balance and transaction queries",
     "version": "1.0.0",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -15,25 +15,25 @@
       "key": "testWalletAddress",
       "value": "0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa",
       "type": "string",
-      "description": "Test için kullanılacak wallet adresi (Bitfinex)"
+                        "description": "Wallet address to be used for testing (Bitfinex)"
     },
     {
       "key": "binanceWalletAddress", 
       "value": "0x8894E0a0c962CB723c1976a4421c95949bE2D4E3",
       "type": "string",
-      "description": "Binance wallet adresi"
+                        "description": "Binance wallet address"
     },
     {
       "key": "usdtTransactionHash",
       "value": "0xc7d5d3cf451e9f3c5eb80dab876d0164e3141bd10ba809dda6c7060ac5129644",
       "type": "string",
-      "description": "Örnek USDT transaction hash'i"
+              "description": "Sample USDT transaction hash"
     },
     {
       "key": "aaTransactionHash",
       "value": "0x4e1fce1afd85ba667e4a2a1b8d95b6f2e7a9c6b3d2e1f0a9b8c7d6e5f4a3b2c1",
       "type": "string",
-      "description": "Örnek AA (Account Abstraction) transaction hash'i - Gerçek hash ile değiştirin"
+              "description": "Sample AA (Account Abstraction) transaction hash - Replace with real hash"
     }
   ],
   "item": [
@@ -53,11 +53,11 @@
                 {
                   "key": "address",
                   "value": "{{testWalletAddress}}",
-                  "description": "Ethereum wallet adresi"
+                  "description": "Ethereum wallet address"
                 }
               ]
             },
-            "description": "Ethereum mainnet'te wallet adresinin ETH bakiyesini sorgular"
+            "description": "Queries ETH balance of wallet address on Ethereum mainnet"
           },
           "response": [
             {
@@ -71,7 +71,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"3.912885883209562072\",\n  \"token\": \"ETH\",\n  \"network\": \"Ethereum\",\n  \"message\": \"ETH bakiyesi başarıyla sorgulandı\"\n}"
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"3.912885883209562072\",\n  \"token\": \"ETH\",\n  \"network\": \"Ethereum\",\n  \"message\": \"ETH balance queried successfully\"\n}"
             }
           ]
         },
@@ -88,11 +88,11 @@
                 {
                   "key": "address",
                   "value": "{{binanceWalletAddress}}",
-                  "description": "BSC wallet adresi"
+                  "description": "BSC wallet address"
                 }
               ]
             },
-            "description": "BSC'de wallet adresinin BNB bakiyesini sorgular"
+            "description": "Queries BNB balance of wallet address on BSC"
           },
           "response": [
             {
@@ -106,7 +106,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"89935.932636892674820679\",\n  \"token\": \"BNB\",\n  \"network\": \"BSC\",\n  \"message\": \"BNB bakiyesi başarıyla sorgulandı\"\n}"
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"89935.932636892674820679\",\n  \"token\": \"BNB\",\n  \"network\": \"BSC\",\n  \"message\": \"BNB balance queried successfully\"\n}"
             }
           ]
         }
@@ -137,7 +137,7 @@
                 }
               ]
             },
-            "description": "Ethereum mainnet'te wallet adresinin USDT bakiyesini sorgular"
+            "description": "Queries USDT balance of wallet address on Ethereum mainnet"
           },
           "response": [
             {
@@ -151,7 +151,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"1138.411014\",\n  \"token\": \"USDT\",\n  \"network\": \"Ethereum\",\n  \"message\": \"Ethereum USDT bakiyesi başarıyla sorgulandı\"\n}"
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"1138.411014\",\n  \"token\": \"USDT\",\n  \"network\": \"Ethereum\",\n  \"message\": \"Ethereum USDT balance queried successfully\"\n}"
             }
           ]
         },
@@ -177,7 +177,7 @@
                 }
               ]
             },
-            "description": "BSC'de wallet adresinin USDT bakiyesini sorgular"
+            "description": "Queries USDT balance of wallet address on BSC"
           },
           "response": [
             {
@@ -191,7 +191,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"70595917.148327937255534036\",\n  \"token\": \"USDT\",\n  \"network\": \"BSC\",\n  \"message\": \"BSC USDT bakiyesi başarıyla sorgulandı\"\n}"
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"70595917.148327937255534036\",\n  \"token\": \"USDT\",\n  \"network\": \"BSC\",\n  \"message\": \"BSC USDT balance queried successfully\"\n}"
             }
           ]
         }
@@ -222,7 +222,7 @@
                 }
               ]
             },
-            "description": "Ethereum transaction hash'inin detaylarını sorgular (FROM, TO, Amount, vs.)"
+            "description": "Queries details of Ethereum transaction hash (FROM, TO, Amount, etc.)"
           }
         },
         {
@@ -247,7 +247,7 @@
                 }
               ]
             },
-            "description": "BSC transaction hash'inin detaylarını sorgular"
+            "description": "Queries details of BSC transaction hash"
           }
         },
         {
@@ -272,7 +272,7 @@
                 }
               ]
             },
-            "description": "Ethereum USDT token transfer'inin detaylarını sorgular (FROM, TO, Amount, Gas vs.)"
+            "description": "Queries details of Ethereum USDT token transfer (FROM, TO, Amount, Gas, etc.)"
           },
           "response": [
             {
@@ -286,7 +286,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"transaction\": {\n    \"hash\": \"0xc7d5d3cf451e9f3c5eb80dab876d0164e3141bd10ba809dda6c7060ac5129644\",\n    \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n    \"to\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"gasPrice\": \"4.871315096\",\n    \"gasLimit\": \"82599\",\n    \"gasUsed\": \"63197\",\n    \"status\": 1,\n    \"blockNumber\": 22638734,\n    \"confirmations\": 35126,\n    \"timestamp\": 1749130451,\n    \"network\": \"ETH\",\n    \"nonce\": 398,\n    \"type\": \"USDT_TRANSFER\",\n    \"contractAddress\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"tokenTransfers\": [\n      {\n        \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n        \"to\": \"0xA806b1D69cFf2B4B899726d46e8d076CBaF7a30e\",\n        \"value\": \"500000000\",\n        \"formattedValue\": \"500.0\",\n        \"token\": \"USDT\"\n      }\n    ],\n    \"isTokenTransaction\": true\n  },\n  \"message\": \"USDT transaction detayları başarıyla alındı\"\n}"
+              "body": "{\n  \"success\": true,\n  \"transaction\": {\n    \"hash\": \"0xc7d5d3cf451e9f3c5eb80dab876d0164e3141bd10ba809dda6c7060ac5129644\",\n    \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n    \"to\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"gasPrice\": \"4.871315096\",\n    \"gasLimit\": \"82599\",\n    \"gasUsed\": \"63197\",\n    \"status\": 1,\n    \"blockNumber\": 22638734,\n    \"confirmations\": 35126,\n    \"timestamp\": 1749130451,\n    \"network\": \"ETH\",\n    \"nonce\": 398,\n    \"type\": \"USDT_TRANSFER\",\n    \"contractAddress\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"tokenTransfers\": [\n      {\n        \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n        \"to\": \"0xA806b1D69cFf2B4B899726d46e8d076CBaF7a30e\",\n        \"value\": \"500000000\",\n        \"formattedValue\": \"500.0\",\n        \"token\": \"USDT\"\n      }\n    ],\n    \"isTokenTransaction\": true\n  },\n  \"message\": \"USDT transaction details fetched successfully\"\n}"
             }
           ]
         },
@@ -303,7 +303,7 @@
                 {
                   "key": "hash",
                   "value": "0x123456789abcdef",
-                  "description": "BSC USDT Transaction hash (örnek)"
+                  "description": "BSC USDT Transaction hash (example)"
                 },
                 {
                   "key": "network",
@@ -312,7 +312,7 @@
                 }
               ]
             },
-            "description": "BSC USDT token transfer'inin detaylarını sorgular"
+            "description": "Queries details of BSC USDT token transfer"
           }
         }
       ]
@@ -342,7 +342,7 @@
                 }
               ]
             },
-            "description": "Ethereum Account Abstraction (ERC-4337) transaction'ını decode eder. UserOperations, multicall, token transfers ve paymaster bilgilerini çıkarır."
+            "description": "Decodes Ethereum Account Abstraction (ERC-4337) transaction. Extracts UserOperations, multicall, token transfers and paymaster information."
           },
           "response": [
             {
@@ -356,7 +356,7 @@
               "status": "OK",
               "code": 200,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"success\": true,\n  \"aaTransaction\": {\n    \"transactionHash\": \"0x4e1fce1afd85ba667e4a2a1b8d95b6f2e7a9c6b3d2e1f0a9b8c7d6e5f4a3b2c1\",\n    \"entryPoint\": \"0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789\",\n    \"bundler\": \"0x1234567890123456789012345678901234567890\",\n    \"userOperations\": [\n      {\n        \"index\": 0,\n        \"sender\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"nonce\": \"123\",\n        \"callData\": \"0x...\",\n        \"decodedCallData\": {\n          \"type\": \"execute\",\n          \"to\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"value\": \"0.1\",\n          \"data\": \"0x...\",\n          \"decoded\": {\n            \"type\": \"ERC20_TRANSFER\",\n            \"function\": \"transfer\",\n            \"to\": \"0x9876543210987654321098765432109876543210\",\n            \"amount\": \"1000000\",\n            \"formattedAmount\": \"1.0\"\n          }\n        },\n        \"gasLimits\": {\n          \"callGasLimit\": \"100000\",\n          \"verificationGasLimit\": \"50000\",\n          \"preVerificationGas\": \"21000\"\n        },\n        \"fees\": {\n          \"maxFeePerGas\": \"20.0\",\n          \"maxPriorityFeePerGas\": \"2.0\"\n        },\n        \"paymaster\": \"0x7890123456789012345678901234567890123456\"\n      }\n    ],\n    \"events\": [\n      {\n        \"name\": \"UserOperationEvent\",\n        \"args\": {\n          \"userOpHash\": \"0x...\",\n          \"sender\": \"0x...\",\n          \"paymaster\": \"0x...\",\n          \"nonce\": 123,\n          \"success\": true,\n          \"actualGasCost\": \"50000\",\n          \"actualGasUsed\": \"48000\"\n        }\n      }\n    ],\n    \"transfers\": [\n      {\n        \"type\": \"ERC20_TRANSFER\",\n        \"token\": {\n          \"address\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"symbol\": \"USDT\",\n          \"decimals\": 6\n        },\n        \"from\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"to\": \"0x9876543210987654321098765432109876543210\",\n        \"value\": \"1000000\",\n        \"formattedValue\": \"1.0\"\n      }\n    ]\n  },\n  \"message\": \"Account Abstraction transaction başarıyla decode edildi\"\n}"
+              "body": "{\n  \"success\": true,\n  \"aaTransaction\": {\n    \"transactionHash\": \"0x4e1fce1afd85ba667e4a2a1b8d95b6f2e7a9c6b3d2e1f0a9b8c7d6e5f4a3b2c1\",\n    \"entryPoint\": \"0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789\",\n    \"bundler\": \"0x1234567890123456789012345678901234567890\",\n    \"userOperations\": [\n      {\n        \"index\": 0,\n        \"sender\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"nonce\": \"123\",\n        \"callData\": \"0x...\",\n        \"decodedCallData\": {\n          \"type\": \"execute\",\n          \"to\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"value\": \"0.1\",\n          \"data\": \"0x...\",\n          \"decoded\": {\n            \"type\": \"ERC20_TRANSFER\",\n            \"function\": \"transfer\",\n            \"to\": \"0x9876543210987654321098765432109876543210\",\n            \"amount\": \"1000000\",\n            \"formattedAmount\": \"1.0\"\n          }\n        },\n        \"gasLimits\": {\n          \"callGasLimit\": \"100000\",\n          \"verificationGasLimit\": \"50000\",\n          \"preVerificationGas\": \"21000\"\n        },\n        \"fees\": {\n          \"maxFeePerGas\": \"20.0\",\n          \"maxPriorityFeePerGas\": \"2.0\"\n        },\n        \"paymaster\": \"0x7890123456789012345678901234567890123456\"\n      }\n    ],\n    \"events\": [\n      {\n        \"name\": \"UserOperationEvent\",\n        \"args\": {\n          \"userOpHash\": \"0x...\",\n          \"sender\": \"0x...\",\n          \"paymaster\": \"0x...\",\n          \"nonce\": 123,\n          \"success\": true,\n          \"actualGasCost\": \"50000\",\n          \"actualGasUsed\": \"48000\"\n        }\n      }\n    ],\n    \"transfers\": [\n      {\n        \"type\": \"ERC20_TRANSFER\",\n        \"token\": {\n          \"address\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"symbol\": \"USDT\",\n          \"decimals\": 6\n        },\n        \"from\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"to\": \"0x9876543210987654321098765432109876543210\",\n        \"value\": \"1000000\",\n        \"formattedValue\": \"1.0\"\n      }\n    ]\n  },\n  \"message\": \"Account Abstraction transaction decoded successfully\"\n}"
             },
             {
               "name": "Error Response - Not AA Transaction",
@@ -395,7 +395,7 @@
                 }
               ]
             },
-            "description": "BSC Account Abstraction transaction'ını decode eder"
+            "description": "Decodes BSC Account Abstraction transaction"
           }
         },
         {
@@ -411,7 +411,7 @@
                 {
                   "key": "hash",
                   "value": "0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b",
-                  "description": "Normal transaction hash (AA değil) - hata mesajı test için"
+                  "description": "Normal transaction hash (not AA) - for error message testing"
                 },
                 {
                   "key": "network",
@@ -420,7 +420,7 @@
                 }
               ]
             },
-            "description": "Normal (AA olmayan) transaction hash ile test - 'This is not a valid AA transaction' hatası beklenir"
+                              "description": "Test with normal (non-AA) transaction hash - 'This is not a valid AA transaction' error expected"
           }
         }
       ]
@@ -441,11 +441,11 @@
                 {
                   "key": "address",
                   "value": "invalid_address",
-                  "description": "Geçersiz adres formatı"
+                  "description": "Invalid address format"
                 }
               ]
             },
-            "description": "Geçersiz adres formatı ile test"
+            "description": "Test with invalid address format"
           },
           "response": [
             {
@@ -459,7 +459,7 @@
               "status": "Bad Request",
               "code": 400,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"message\": \"ETH bakiye sorgulanamadı: Geçersiz Ethereum adresi\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+              "body": "{\n  \"message\": \"ETH balance fetch failed: Invalid Ethereum address\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
             }
           ]
         },
@@ -473,7 +473,7 @@
               "host": ["{{baseUrl}}"],
               "path": ["wallet", "eth-balance"]
             },
-            "description": "Address parametresi olmadan test"
+            "description": "Test without address parameter"
           },
           "response": [
             {
@@ -487,7 +487,7 @@
               "status": "Bad Request",
               "code": 400,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"message\": \"Wallet adresi gerekli\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+              "body": "{\n  \"message\": \"Wallet address is required\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
             }
           ]
         },
@@ -504,7 +504,7 @@
                 {
                   "key": "hash",
                   "value": "invalid_hash",
-                  "description": "Geçersiz transaction hash formatı"
+                  "description": "Invalid transaction hash format"
                 },
                 {
                   "key": "network",
@@ -513,7 +513,7 @@
                 }
               ]
             },
-            "description": "Geçersiz transaction hash ile test"
+            "description": "Test with invalid transaction hash"
           },
           "response": [
             {
@@ -548,7 +548,7 @@
                 }
               ]
             },
-            "description": "Network parametresi olmadan test"
+            "description": "Test without network parameter"
           },
           "response": [
             {
@@ -562,7 +562,7 @@
               "status": "Bad Request",
               "code": 400,
               "_postman_previewlanguage": "json",
-              "body": "{\n  \"message\": \"Network ETH veya BSC olmalı\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+              "body": "{\n  \"message\": \"Network must be ETH or BSC\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
             }
           ]
         }

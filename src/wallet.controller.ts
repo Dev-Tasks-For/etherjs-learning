@@ -9,7 +9,7 @@ export class WalletController {
   @Get('eth-balance')
   async getEthBalance(@Query('address') address: string) {
     if (!address) {
-      throw new BadRequestException('Wallet adresi gerekli');
+      throw new BadRequestException('Wallet address is required');
     }
 
     try {
@@ -20,7 +20,7 @@ export class WalletController {
         balance,
         token: 'ETH',
         network: 'Ethereum',
-        message: 'ETH bakiyesi başarıyla sorgulandı'
+        message: 'ETH balance queried successfully'
       };
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -31,7 +31,7 @@ export class WalletController {
   @Get('bnb-balance')
   async getBnbBalance(@Query('address') address: string) {
     if (!address) {
-      throw new BadRequestException('Wallet adresi gerekli');
+      throw new BadRequestException('Wallet address is required');
     }
 
     try {
@@ -42,7 +42,7 @@ export class WalletController {
         balance,
         token: 'BNB',
         network: 'BSC',
-        message: 'BNB bakiyesi başarıyla sorgulandı'
+        message: 'BNB balance queried successfully'
       };
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -73,7 +73,7 @@ export class WalletController {
         balance,
         token: 'USDT',
         network: networkUpper === 'ETH' ? 'Ethereum' : 'BSC',
-        message: `${networkUpper === 'ETH' ? 'Ethereum' : 'BSC'} USDT bakiyesi başarıyla sorgulandı`
+        message: `${networkUpper === 'ETH' ? 'Ethereum' : 'BSC'} USDT balance queried successfully`
       };
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -117,11 +117,11 @@ export class WalletController {
     @Query('network') network: string
   ) {
     if (!hash) {
-      throw new BadRequestException('Transaction hash gerekli');
+      throw new BadRequestException('Transaction hash is required');
     }
 
     if (!network || !['ETH', 'BSC'].includes(network.toUpperCase())) {
-      throw new BadRequestException('Network ETH veya BSC olmalı');
+      throw new BadRequestException('Network must be ETH or BSC');
     }
 
     try {
@@ -133,7 +133,7 @@ export class WalletController {
       return {
         success: true,
         transaction,
-        message: 'USDT transaction detayları başarıyla alındı'
+        message: 'USDT transaction details fetched successfully'
       };
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -147,11 +147,11 @@ export class WalletController {
     @Query('network') network: string = 'ETH'
   ) {
     if (!hash) {
-      throw new BadRequestException('Transaction hash gerekli');
+      throw new BadRequestException('Transaction hash is required');
     }
 
     if (!['ETH', 'BSC'].includes(network.toUpperCase())) {
-      throw new BadRequestException('Network ETH veya BSC olmalı');
+      throw new BadRequestException('Network must be ETH or BSC');
     }
 
     try {
@@ -163,7 +163,7 @@ export class WalletController {
       return {
         success: true,
         aaTransaction,
-        message: 'Account Abstraction transaction başarıyla decode edildi'
+        message: 'Account Abstraction transaction decoded successfully'
       };
     } catch (error) {
       throw new BadRequestException(error.message);

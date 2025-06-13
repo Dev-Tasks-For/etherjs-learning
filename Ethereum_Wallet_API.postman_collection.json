@@ -1,0 +1,608 @@
+{
+  "info": {
+    "name": "Ethereum Wallet API",
+    "description": "Ethereum ve BSC wallet bakiyesi ve transaction sorguları için API collection",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "testWalletAddress",
+      "value": "0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa",
+      "type": "string",
+      "description": "Test için kullanılacak wallet adresi (Bitfinex)"
+    },
+    {
+      "key": "binanceWalletAddress", 
+      "value": "0x8894E0a0c962CB723c1976a4421c95949bE2D4E3",
+      "type": "string",
+      "description": "Binance wallet adresi"
+    },
+    {
+      "key": "usdtTransactionHash",
+      "value": "0xc7d5d3cf451e9f3c5eb80dab876d0164e3141bd10ba809dda6c7060ac5129644",
+      "type": "string",
+      "description": "Örnek USDT transaction hash'i"
+    },
+    {
+      "key": "aaTransactionHash",
+      "value": "0x4e1fce1afd85ba667e4a2a1b8d95b6f2e7a9c6b3d2e1f0a9b8c7d6e5f4a3b2c1",
+      "type": "string",
+      "description": "Örnek AA (Account Abstraction) transaction hash'i - Gerçek hash ile değiştirin"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Native Balance Queries",
+      "item": [
+        {
+          "name": "Get ETH Balance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/eth-balance?address={{testWalletAddress}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "eth-balance"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "{{testWalletAddress}}",
+                  "description": "Ethereum wallet adresi"
+                }
+              ]
+            },
+            "description": "Ethereum mainnet'te wallet adresinin ETH bakiyesini sorgular"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/eth-balance?address={{testWalletAddress}}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"3.912885883209562072\",\n  \"token\": \"ETH\",\n  \"network\": \"Ethereum\",\n  \"message\": \"ETH bakiyesi başarıyla sorgulandı\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get BNB Balance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/bnb-balance?address={{binanceWalletAddress}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "bnb-balance"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "{{binanceWalletAddress}}",
+                  "description": "BSC wallet adresi"
+                }
+              ]
+            },
+            "description": "BSC'de wallet adresinin BNB bakiyesini sorgular"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/bnb-balance?address={{binanceWalletAddress}}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"89935.932636892674820679\",\n  \"token\": \"BNB\",\n  \"network\": \"BSC\",\n  \"message\": \"BNB bakiyesi başarıyla sorgulandı\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. USDT Token Queries",
+      "item": [
+        {
+          "name": "Get USDT Balance (Ethereum)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-balance?address={{testWalletAddress}}&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-balance"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "{{testWalletAddress}}",
+                  "description": "Ethereum wallet adresi"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "Ethereum mainnet'te wallet adresinin USDT bakiyesini sorgular"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/usdt-balance?address={{testWalletAddress}}&network=ETH"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa\",\n  \"balance\": \"1138.411014\",\n  \"token\": \"USDT\",\n  \"network\": \"Ethereum\",\n  \"message\": \"Ethereum USDT bakiyesi başarıyla sorgulandı\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get USDT Balance (BSC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-balance?address={{binanceWalletAddress}}&network=BSC",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-balance"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "{{binanceWalletAddress}}",
+                  "description": "BSC wallet adresi"
+                },
+                {
+                  "key": "network",
+                  "value": "BSC",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "BSC'de wallet adresinin USDT bakiyesini sorgular"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/usdt-balance?address={{binanceWalletAddress}}&network=BSC"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"address\": \"0x8894E0a0c962CB723c1976a4421c95949bE2D4E3\",\n  \"balance\": \"70595917.148327937255534036\",\n  \"token\": \"USDT\",\n  \"network\": \"BSC\",\n  \"message\": \"BSC USDT bakiyesi başarıyla sorgulandı\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Transaction Queries",
+      "item": [
+        {
+          "name": "Get Transaction Details (Ethereum)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/transaction?hash=0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b",
+                  "description": "Transaction hash (64 karakter)"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "Ethereum transaction hash'inin detaylarını sorgular (FROM, TO, Amount, vs.)"
+          }
+        },
+        {
+          "name": "Get Transaction Details (BSC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/transaction?hash=0x1c1e3e9b7a2f8c4d3e5a6b7c8d9e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9&network=BSC",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "0x1c1e3e9b7a2f8c4d3e5a6b7c8d9e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9",
+                  "description": "BSC Transaction hash"
+                },
+                {
+                  "key": "network",
+                  "value": "BSC",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "BSC transaction hash'inin detaylarını sorgular"
+          }
+        },
+        {
+          "name": "Get USDT Transaction Details (Ethereum)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-transaction?hash={{usdtTransactionHash}}&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "{{usdtTransactionHash}}",
+                  "description": "USDT Transaction hash"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "Ethereum USDT token transfer'inin detaylarını sorgular (FROM, TO, Amount, Gas vs.)"
+          },
+          "response": [
+            {
+              "name": "Success Response - USDT Transfer",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/usdt-transaction?hash={{usdtTransactionHash}}&network=ETH"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"transaction\": {\n    \"hash\": \"0xc7d5d3cf451e9f3c5eb80dab876d0164e3141bd10ba809dda6c7060ac5129644\",\n    \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n    \"to\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"gasPrice\": \"4.871315096\",\n    \"gasLimit\": \"82599\",\n    \"gasUsed\": \"63197\",\n    \"status\": 1,\n    \"blockNumber\": 22638734,\n    \"confirmations\": 35126,\n    \"timestamp\": 1749130451,\n    \"network\": \"ETH\",\n    \"nonce\": 398,\n    \"type\": \"USDT_TRANSFER\",\n    \"contractAddress\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\n    \"tokenTransfers\": [\n      {\n        \"from\": \"0xD0Ff49D007381412a13a1a19F648b8cD54800E93\",\n        \"to\": \"0xA806b1D69cFf2B4B899726d46e8d076CBaF7a30e\",\n        \"value\": \"500000000\",\n        \"formattedValue\": \"500.0\",\n        \"token\": \"USDT\"\n      }\n    ],\n    \"isTokenTransaction\": true\n  },\n  \"message\": \"USDT transaction detayları başarıyla alındı\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get USDT Transaction Details (BSC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-transaction?hash=0x123456789abcdef&network=BSC",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "0x123456789abcdef",
+                  "description": "BSC USDT Transaction hash (örnek)"
+                },
+                {
+                  "key": "network",
+                  "value": "BSC",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "BSC USDT token transfer'inin detaylarını sorgular"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Account Abstraction (AA) Decoder",
+      "item": [
+        {
+          "name": "Decode AA Transaction (Ethereum)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/aa-transaction?hash={{aaTransactionHash}}&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "aa-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "{{aaTransactionHash}}",
+                  "description": "Account Abstraction transaction hash (ERC-4337)"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "Ethereum Account Abstraction (ERC-4337) transaction'ını decode eder. UserOperations, multicall, token transfers ve paymaster bilgilerini çıkarır."
+          },
+          "response": [
+            {
+              "name": "Success Response - AA Transaction",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/aa-transaction?hash={{aaTransactionHash}}&network=ETH"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"success\": true,\n  \"aaTransaction\": {\n    \"transactionHash\": \"0x4e1fce1afd85ba667e4a2a1b8d95b6f2e7a9c6b3d2e1f0a9b8c7d6e5f4a3b2c1\",\n    \"entryPoint\": \"0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789\",\n    \"bundler\": \"0x1234567890123456789012345678901234567890\",\n    \"userOperations\": [\n      {\n        \"index\": 0,\n        \"sender\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"nonce\": \"123\",\n        \"callData\": \"0x...\",\n        \"decodedCallData\": {\n          \"type\": \"execute\",\n          \"to\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"value\": \"0.1\",\n          \"data\": \"0x...\",\n          \"decoded\": {\n            \"type\": \"ERC20_TRANSFER\",\n            \"function\": \"transfer\",\n            \"to\": \"0x9876543210987654321098765432109876543210\",\n            \"amount\": \"1000000\",\n            \"formattedAmount\": \"1.0\"\n          }\n        },\n        \"gasLimits\": {\n          \"callGasLimit\": \"100000\",\n          \"verificationGasLimit\": \"50000\",\n          \"preVerificationGas\": \"21000\"\n        },\n        \"fees\": {\n          \"maxFeePerGas\": \"20.0\",\n          \"maxPriorityFeePerGas\": \"2.0\"\n        },\n        \"paymaster\": \"0x7890123456789012345678901234567890123456\"\n      }\n    ],\n    \"events\": [\n      {\n        \"name\": \"UserOperationEvent\",\n        \"args\": {\n          \"userOpHash\": \"0x...\",\n          \"sender\": \"0x...\",\n          \"paymaster\": \"0x...\",\n          \"nonce\": 123,\n          \"success\": true,\n          \"actualGasCost\": \"50000\",\n          \"actualGasUsed\": \"48000\"\n        }\n      }\n    ],\n    \"transfers\": [\n      {\n        \"type\": \"ERC20_TRANSFER\",\n        \"token\": {\n          \"address\": \"0xA0b86a33E6441e8F422b8b1C7E5A74c2F8E6A8\",\n          \"symbol\": \"USDT\",\n          \"decimals\": 6\n        },\n        \"from\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n        \"to\": \"0x9876543210987654321098765432109876543210\",\n        \"value\": \"1000000\",\n        \"formattedValue\": \"1.0\"\n      }\n    ]\n  },\n  \"message\": \"Account Abstraction transaction başarıyla decode edildi\"\n}"
+            },
+            {
+              "name": "Error Response - Not AA Transaction",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/aa-transaction?hash=0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b&network=ETH"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"message\": \"AA transaction decode failed: This is not a valid AA transaction\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+            }
+          ]
+        },
+        {
+          "name": "Decode AA Transaction (BSC)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/aa-transaction?hash={{aaTransactionHash}}&network=BSC",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "aa-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "{{aaTransactionHash}}",
+                  "description": "Account Abstraction transaction hash (ERC-4337)"
+                },
+                {
+                  "key": "network",
+                  "value": "BSC",
+                  "description": "Network: ETH veya BSC"
+                }
+              ]
+            },
+            "description": "BSC Account Abstraction transaction'ını decode eder"
+          }
+        },
+        {
+          "name": "Test with Normal Transaction Hash",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/aa-transaction?hash=0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "aa-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b",
+                  "description": "Normal transaction hash (AA değil) - hata mesajı test için"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH"
+                }
+              ]
+            },
+            "description": "Normal (AA olmayan) transaction hash ile test - 'This is not a valid AA transaction' hatası beklenir"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Error Cases",
+      "item": [
+        {
+          "name": "Invalid Address Error",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/eth-balance?address=invalid_address",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "eth-balance"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "invalid_address",
+                  "description": "Geçersiz adres formatı"
+                }
+              ]
+            },
+            "description": "Geçersiz adres formatı ile test"
+          },
+          "response": [
+            {
+              "name": "Error Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/eth-balance?address=invalid_address"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"message\": \"ETH bakiye sorgulanamadı: Geçersiz Ethereum adresi\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+            }
+          ]
+        },
+        {
+          "name": "Missing Address Parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/eth-balance",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "eth-balance"]
+            },
+            "description": "Address parametresi olmadan test"
+          },
+          "response": [
+            {
+              "name": "Error Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/eth-balance"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"message\": \"Wallet adresi gerekli\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+            }
+          ]
+        },
+        {
+          "name": "Invalid Transaction Hash Error",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-transaction?hash=invalid_hash&network=ETH",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "invalid_hash",
+                  "description": "Geçersiz transaction hash formatı"
+                },
+                {
+                  "key": "network",
+                  "value": "ETH",
+                  "description": "Network: ETH"
+                }
+              ]
+            },
+            "description": "Geçersiz transaction hash ile test"
+          },
+          "response": [
+            {
+              "name": "Error Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/usdt-transaction?hash=invalid_hash&network=ETH"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"message\": \"USDT transaction fetch failed: Transaction not found\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+            }
+          ]
+        },
+        {
+          "name": "Missing Network Parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/wallet/usdt-transaction?hash={{usdtTransactionHash}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "usdt-transaction"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "{{usdtTransactionHash}}",
+                  "description": "USDT Transaction hash"
+                }
+              ]
+            },
+            "description": "Network parametresi olmadan test"
+          },
+          "response": [
+            {
+              "name": "Error Response",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/wallet/usdt-transaction?hash={{usdtTransactionHash}}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"message\": \"Network ETH veya BSC olmalı\",\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "// Global pre-request script",
+          "console.log('API Request to:', pm.request.url.toString());"
+        ],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "// Global test script",
+          "pm.test('Status code is 200 or 400', function () {",
+          "    pm.expect([200, 400]).to.include(pm.response.code);",
+          "});",
+          "",
+          "pm.test('Response has JSON format', function () {",
+          "    pm.response.to.have.jsonBody();",
+          "});",
+          "",
+          "if (pm.response.code === 200) {",
+          "    pm.test('Success response has required fields', function () {",
+          "        const jsonData = pm.response.json();",
+          "        pm.expect(jsonData).to.have.property('success');",
+          "        pm.expect(jsonData.success).to.be.true;",
+          "    });",
+          "}"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+} 

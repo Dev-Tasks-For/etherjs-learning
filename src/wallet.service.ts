@@ -84,29 +84,15 @@ export class WalletService {
     'function executeBatch(address[] calldata dest, uint256[] calldata values, bytes[] calldata func)'
   ]);
 
-  // Common token interfaces for decoding
-  private readonly tokenInterfaces = {
-    erc20: new ethers.Interface([
-      'function transfer(address to, uint256 amount) returns (bool)',
-      'function transferFrom(address from, address to, uint256 amount) returns (bool)',
-      'function approve(address spender, uint256 amount) returns (bool)',
-      'function mint(address to, uint256 amount)',
-      'function burn(uint256 amount)',
-      'function burn(address from, uint256 amount)'
-    ]),
-    erc721: new ethers.Interface([
-      'function transferFrom(address from, address to, uint256 tokenId)',
-      'function safeTransferFrom(address from, address to, uint256 tokenId)',
-      'function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data)',
-      'function approve(address to, uint256 tokenId)',
-      'function setApprovalForAll(address operator, bool approved)'
-    ]),
-    erc1155: new ethers.Interface([
-      'function safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes calldata data)',
-      'function safeBatchTransferFrom(address from, address to, uint256[] calldata ids, uint256[] calldata amounts, bytes calldata data)',
-      'function setApprovalForAll(address operator, bool approved)'
-    ])
-  };
+  // ERC-20 token interface for decoding
+  private readonly erc20Interface = new ethers.Interface([
+    'function transfer(address to, uint256 amount) returns (bool)',
+    'function transferFrom(address from, address to, uint256 amount) returns (bool)',
+    'function approve(address spender, uint256 amount) returns (bool)',
+    'function mint(address to, uint256 amount)',
+    'function burn(uint256 amount)',
+    'function burn(address from, uint256 amount)'
+  ]);
 
   constructor() {
     // Ethereum Mainnet provider
@@ -204,25 +190,19 @@ export class WalletService {
           ? this.ethUsdtContractAddress
           : this.bscUsdtContractAddress;
 
-      // Create USDT contract instance
-      const usdtContract = new ethers.Contract(
-        contractAddress,
-        this.erc20Abi,
-        provider,
-      );
+      // Create contract instance
+      const contract = new ethers.Contract(contractAddress, this.erc20Abi, provider);
 
-      // Get balance and decimals information
+      // Get balance and decimals in parallel
       const [balance, decimals] = await Promise.all([
-        usdtContract.balanceOf(address),
-        usdtContract.decimals(),
+        contract.balanceOf(address),
+        contract.decimals(),
       ]);
 
-      // Convert balance to human readable format
-      const formattedBalance = ethers.formatUnits(balance, decimals);
-
-      return formattedBalance;
+      // Format balance according to token decimals
+      return ethers.formatUnits(balance, decimals);
     } catch (error) {
-      throw new Error(`${network} USDT balance fetch failed: ${error.message}`);
+      throw new Error(`USDT balance fetch failed: ${error.message}`);
     }
   }
 
@@ -519,7 +499,7 @@ export class WalletService {
     try {
       // Try ERC-20 functions
       try {
-        const erc20Decoded = this.tokenInterfaces.erc20.parseTransaction({ data });
+        const erc20Decoded = this.erc20Interface.parseTransaction({ data });
         if (erc20Decoded) {
           switch (erc20Decoded.name) {
             case 'transfer':
@@ -561,65 +541,6 @@ export class WalletService {
                 function: 'burn',
                 amount: erc20Decoded.args.amount.toString(),
                 formattedAmount: ethers.formatUnits(erc20Decoded.args.amount, 18)
-              };
-          }
-        }
-      } catch { /* Continue to next decoder */ }
-
-      // Try ERC-721 functions
-      try {
-        const erc721Decoded = this.tokenInterfaces.erc721.parseTransaction({ data });
-        if (erc721Decoded) {
-          switch (erc721Decoded.name) {
-            case 'transferFrom':
-            case 'safeTransferFrom':
-              return {
-                type: 'ERC721_TRANSFER',
-                function: erc721Decoded.name,
-                from: erc721Decoded.args.from,
-                to: erc721Decoded.args.to,
-                tokenId: erc721Decoded.args.tokenId.toString()
-              };
-            case 'approve':
-              return {
-                type: 'ERC721_APPROVE',
-                function: 'approve',
-                to: erc721Decoded.args.to,
-                tokenId: erc721Decoded.args.tokenId.toString()
-              };
-            case 'setApprovalForAll':
-              return {
-                type: 'ERC721_APPROVAL_FOR_ALL',
-                function: 'setApprovalForAll',
-                operator: erc721Decoded.args.operator,
-                approved: erc721Decoded.args.approved
-              };
-          }
-        }
-      } catch { /* Continue to next decoder */ }
-
-      // Try ERC-1155 functions
-      try {
-        const erc1155Decoded = this.tokenInterfaces.erc1155.parseTransaction({ data });
-        if (erc1155Decoded) {
-          switch (erc1155Decoded.name) {
-            case 'safeTransferFrom':
-              return {
-                type: 'ERC1155_TRANSFER',
-                function: 'safeTransferFrom',
-                from: erc1155Decoded.args.from,
-                to: erc1155Decoded.args.to,
-                id: erc1155Decoded.args.id.toString(),
-                amount: erc1155Decoded.args.amount.toString()
-              };
-            case 'safeBatchTransferFrom':
-              return {
-                type: 'ERC1155_BATCH_TRANSFER',
-                function: 'safeBatchTransferFrom',
-                from: erc1155Decoded.args.from,
-                to: erc1155Decoded.args.to,
-                ids: erc1155Decoded.args.ids.map((id: any) => id.toString()),
-                amounts: erc1155Decoded.args.amounts.map((amount: any) => amount.toString())
               };
           }
         }

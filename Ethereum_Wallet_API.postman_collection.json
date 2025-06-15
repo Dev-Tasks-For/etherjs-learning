@@ -128,7 +128,7 @@
                 {
                   "key": "address",
                   "value": "{{testWalletAddress}}",
-                  "description": "Ethereum wallet adresi"
+                  						"description": "Ethereum wallet address"
                 },
                 {
                   "key": "network",
@@ -168,7 +168,7 @@
                 {
                   "key": "address",
                   "value": "{{binanceWalletAddress}}",
-                  "description": "BSC wallet adresi"
+                  						"description": "BSC wallet address"
                 },
                 {
                   "key": "network",
